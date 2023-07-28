@@ -1,8 +1,11 @@
 package com.curso.curso.controllers;
 
+import com.curso.curso.dao.UserDAO;
 import com.curso.curso.models.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -10,8 +13,9 @@ import java.util.List;
 
 @RestController
 public class UserController {
-
-    @RequestMapping(value = "user/{id}")
+    @Autowired
+    private UserDAO userDao;
+    @RequestMapping(value = "api/user/{id}", method = RequestMethod.GET)
     public User getUser(@PathVariable int id){
         User user = new User();
         user.setId(id);
@@ -32,14 +36,9 @@ public class UserController {
         return user;
     }
 
-    @RequestMapping(value = "user2")
-    public User deleteUser(){
-        User user = new User();
-        user.setName("Ricardo");
-        user.setLastName("Rios");
-        user.setEmail("ric@rdo.com");
-        user.setPhone("3131313134");
-        return user;
+    @RequestMapping(value = "api/users/{id}", method = RequestMethod.DELETE)
+    public void deleteUser(@PathVariable int id){
+        userDao.delete(id);
     }
 
     @RequestMapping(value = "user3")
@@ -52,37 +51,9 @@ public class UserController {
         return user;
     }
 
-    @RequestMapping(value = "users")
+    @RequestMapping(value = "api/users")
     public List<User> getUsers(){
-
-        List<User> users = new ArrayList<>();
-
-        User user = new User();
-        user.setId(1);
-        user.setName("Ricardo");
-        user.setLastName("Rios");
-        user.setEmail("ric@rdo.com");
-        user.setPhone("3131313134");
-
-        User user2 = new User();
-        user2.setId(2);
-        user2.setName("Jova");
-        user2.setLastName("Sahagun");
-        user2.setEmail("js@gmail.com");
-        user2.setPhone("13213131344");
-
-        User user3 = new User();
-        user3.setId(3);
-        user3.setName("Bala");
-        user3.setLastName("Bonnie");
-        user3.setEmail("bb@gmail.com");
-        user3.setPhone("12331233");
-
-        users.add(user);
-        users.add(user2);
-        users.add(user3);
-
-        return users;
+        return userDao.getUsers();
     }
 
 }
