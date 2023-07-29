@@ -3,10 +3,7 @@ package com.curso.curso.controllers;
 import com.curso.curso.dao.UserDAO;
 import com.curso.curso.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +27,7 @@ public class UserController {
     public User modifyUser(){
         User user = new User();
         user.setName("Ricardo");
-        user.setLastName("Rios");
+        //user.setLastName("Rios");
         user.setEmail("ric@rdo.com");
         user.setPhone("3131313134");
         return user;
@@ -45,15 +42,19 @@ public class UserController {
     public User searchUser(){
         User user = new User();
         user.setName("Ricardo");
-        user.setLastName("Rios");
+        //user.setLastName("Rios");
         user.setEmail("ric@rdo.com");
         user.setPhone("3131313134");
         return user;
     }
 
-    @RequestMapping(value = "api/users")
+    @RequestMapping(value = "api/users",method = RequestMethod.GET)
     public List<User> getUsers(){
         return userDao.getUsers();
     }
 
+    @RequestMapping(value = "api/users",method = RequestMethod.POST)
+    public void registerUser(@RequestBody User user){
+        userDao.registerUser(user);
+    }
 }

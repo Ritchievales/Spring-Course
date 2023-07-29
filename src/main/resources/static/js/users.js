@@ -23,8 +23,9 @@ async function loadUsers(){
 
         let deleteBtn = '<a href="#" onclick="deleteUser('+ user.id +')" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a>';
 
+        let phone = user.phone == null ? "-" : user.phone;
 
-        let userHtml = '<tr> <td>'+user.id+'</td> <td>'+user.name+' '+ user.lastName +'</td><td>'+user.email+'</td><td>'+user.phone+'</td><td>'+ deleteBtn +'</td></tr>';
+        let userHtml = '<tr> <td>'+user.id+'</td> <td>'+user.name+' '+ user.lastName +'</td><td>'+user.email+'</td><td>'+phone+'</td><td>'+ deleteBtn +'</td></tr>';
         listHTML += userHtml;
     }
 

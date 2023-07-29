@@ -1,10 +1,7 @@
 package com.curso.curso.models;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,12 +14,13 @@ public class User {
 
     @Id
     @Getter @Setter @Column(name= "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Getter @Setter  @Column(name= "name")
     private String name;
 
-    @Getter @Setter  @Column(name= "lastname")
+    @Getter @Setter  @Column(name= "lastName")
     private String lastName;
 
     @Getter @Setter  @Column(name= "email")
